@@ -52,7 +52,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="brand" size="lg" className="hidden sm:inline-flex" asChild>
+          <Button variant="brand" size="lg" className="hidden sm:inline-flex">
             <a href="#cta">Analyze Now</a>
           </Button>
           <button

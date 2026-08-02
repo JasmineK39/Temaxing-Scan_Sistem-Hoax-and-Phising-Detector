@@ -19,15 +19,18 @@ export function CTA() {
           Run your first scan in seconds. No installation, no security background required.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button variant="brand" size="xl" asChild>
-            <a href="#home">
-              Start Scanning
-              <ArrowRight aria-hidden="true" />
-            </a>
-          </Button>
-          <Button variant="soft" size="xl" asChild>
-            <a href="#how-it-works">See how it works</a>
-          </Button>
+          <a href="#home">
+  <Button variant="brand" size="xl">
+    Start Scanning
+    <ArrowRight aria-hidden="true" />
+  </Button>
+</a>
+
+<a href="#how-it-works">
+  <Button variant="soft" size="xl">
+    See how it works
+  </Button>
+</a>
         </div>
       </div>
     </Section>

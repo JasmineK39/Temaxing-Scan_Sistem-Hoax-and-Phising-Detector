@@ -24,18 +24,17 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button variant="brand" size="xl" asChild>
-              <a href="#cta">
-                <Link2 aria-hidden="true" />
-                Analyze URL
-              </a>
-            </Button>
-            <Button variant="soft" size="xl" asChild>
-              <a href="#features">
-                Learn More
-                <ArrowRight aria-hidden="true" />
-              </a>
-            </Button>
+            <a href="#cta">
+    <Button variant="brand" size="xl">
+        <Link2 className="mr-2 h-4 w-4" />
+        Analyze URL
+    </Button>
+</a>
+            <a href="#features">
+    <Button variant="soft" size="xl">
+        Learn More
+    </Button>
+</a>
           </div>
 
           <dl className="mt-2 grid w-full max-w-lg grid-cols-3 gap-6 border-t border-border pt-7">
