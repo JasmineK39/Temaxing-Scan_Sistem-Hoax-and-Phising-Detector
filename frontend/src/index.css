@@ -46,6 +46,29 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+
+    --color-brand: var(--brand);
+--color-brand-hover: var(--brand-hover);
+--color-surface: var(--surface);
+
+--color-success: var(--success);
+--color-success-foreground: var(--success-foreground);
+--color-warning: var(--warning);
+
+--shadow-soft:
+0 4px 16px rgba(35,40,70,0.08);
+
+--shadow-lift:
+0 12px 32px rgba(35,40,70,0.10);
+
+--shadow-glow:
+0 20px 60px rgba(78,42,200,0.20);
+
+--color-brand: var(--brand);
+--color-brand-hover: var(--brand-hover);
+--color-brand-secondary: var(--brand-secondary);
+
+--color-surface: var(--surface);
 }
 
 :root {
@@ -81,6 +104,66 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --surface: oklch(1 0 0);
+
+/* ===== TEMAXING COLOR PALETTE ===== */
+
+--background: #FAFAFD;
+--foreground: #1F2430;
+
+--card: #FFFFFF;
+--card-foreground: #1F2430;
+
+--popover: #FFFFFF;
+--popover-foreground: #1F2430;
+
+--primary: #4E2AC8;
+--primary-foreground: #FFFFFF;
+
+--secondary: #7A5AF8;
+--secondary-foreground: #FFFFFF;
+
+--accent: #E86BB8;
+--accent-foreground: #FFFFFF;
+
+--border: #E7E8EF;
+--input: #E7E8EF;
+--ring: #7A5AF8;
+
+--muted: #F5F6FB;
+--muted-foreground: #6B7280;
+
+--surface: #FFFFFF;
+
+--brand: #4E2AC8;
+--brand-hover: #4022A5;
+--brand-secondary: #7A5AF8;
+
+--success: #22C55E;
+--success-foreground: #FFFFFF;
+
+--warning: #F59E0B;
+
+--ai-highlight: #FFF6FB;
+
+/* Charts */
+
+--chart-1: #4E2AC8;
+--chart-2: #7A5AF8;
+--chart-3: #E86BB8;
+--chart-4: #8B5CF6;
+--chart-5: #C084FC;
+
+/* Sidebar */
+
+--sidebar: #FFFFFF;
+--sidebar-foreground: #1F2430;
+--sidebar-primary: #4E2AC8;
+--sidebar-primary-foreground: #FFFFFF;
+--sidebar-accent: #F5F6FB;
+--sidebar-accent-foreground: #1F2430;
+--sidebar-border: #E7E8EF;
+--sidebar-ring: #7A5AF8;
 }
 
 .dark {
@@ -127,4 +210,34 @@
   html {
     @apply font-sans;
     }
+}
+
+@utility gradient-hero {
+  background:
+  linear-gradient(
+      135deg,
+      #FFFFFF 0%,
+      #F4F0FF 45%,
+      #FFF6FB 100%
+  );
+}
+
+@utility card-soft {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@utility text-gradient-brand {
+  background: linear-gradient(
+      90deg,
+      #4E2AC8,
+      #7A5AF8,
+      #E86BB8
+  );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
