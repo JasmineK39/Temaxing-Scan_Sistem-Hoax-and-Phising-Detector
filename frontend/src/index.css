@@ -295,3 +295,11 @@
 @utility text-brand {
     color: var(--color-brand);
 }
+
+@utility bg-brand-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--brand),
+    var(--brand-secondary)
+  );
+}
