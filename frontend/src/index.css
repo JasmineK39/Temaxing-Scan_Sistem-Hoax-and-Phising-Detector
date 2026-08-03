@@ -69,6 +69,16 @@
 --color-brand-secondary: var(--brand-secondary);
 
 --color-surface: var(--surface);
+
+--color-risk-safe: var(--risk-safe);
+--color-risk-low: var(--risk-low);
+--color-risk-medium: var(--risk-medium);
+--color-risk-high: var(--risk-high);
+
+--color-ai: var(--ai);
+--color-ai-foreground: var(--ai-foreground);
+
+
 }
 
 :root {
@@ -105,6 +115,14 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
     --surface: oklch(1 0 0);
+
+    --risk-safe: #22C55E;
+--risk-low: #F59E0B;
+--risk-medium: #F97316;
+--risk-high: #EF4444;
+
+--ai: #FFF6FB;
+--ai-foreground: #4E2AC8;
 
 /* ===== TEMAXING COLOR PALETTE ===== */
 
@@ -240,4 +258,40 @@
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
+}
+
+@utility bg-risk-safe {
+    background: var(--color-risk-safe);
+}
+
+@utility bg-risk-low {
+    background: var(--color-risk-low);
+}
+
+@utility bg-risk-medium {
+    background: var(--color-risk-medium);
+}
+
+@utility bg-risk-high {
+    background: var(--color-risk-high);
+}
+
+@utility bg-ai {
+    background: var(--color-ai);
+}
+
+@utility text-ai-foreground {
+    color: var(--color-ai-foreground);
+}
+
+@utility bg-brand-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--color-brand),
+        var(--color-brand-secondary)
+    );
+}
+
+@utility text-brand {
+    color: var(--color-brand);
 }
