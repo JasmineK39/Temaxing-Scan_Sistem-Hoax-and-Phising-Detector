@@ -105,7 +105,24 @@ export default function FakeNewsPage() {
                   type="button"
                   onClick={analyze}
                   disabled={loading}
-                  className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-xl gradient-hero px-6 text-sm font-semibold text-white shadow-glow transition hover:brightness-110 disabled:opacity-70"
+                  className="
+    inline-flex
+    h-12
+    flex-1
+    items-center
+    justify-center
+    gap-2
+    rounded-xl
+    bg-brand-gradient
+    px-6
+    text-sm
+    font-semibold
+    text-white
+    shadow-glow
+    transition
+    hover:brightness-110
+    disabled:opacity-70
+  "
                 >
                   {loading ? (
                     <Loader2 className="size-4 animate-spin" />
