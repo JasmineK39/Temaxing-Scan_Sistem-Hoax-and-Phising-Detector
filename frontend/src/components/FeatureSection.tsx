@@ -52,10 +52,12 @@ export function FeatureSection() {
       <ul className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {FEATURES.map((feature) => (
           <li key={feature.title} className="card-soft flex flex-col gap-4 p-8">
-            <span className="flex size-12 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+            <span className="flex size-12 items-center justify-center rounded-2xl bg-muted text-brand">
               <feature.icon className="size-6" aria-hidden="true" />
             </span>
-            <h3 className="text-[22px] leading-snug font-semibold">{feature.title}</h3>
+            <h3 className="text-[22px] leading-snug font-semibold text-foreground">
+              {feature.title}
+            </h3>
             <p className="text-[15px] leading-relaxed text-muted-foreground">
               {feature.description}
             </p>
