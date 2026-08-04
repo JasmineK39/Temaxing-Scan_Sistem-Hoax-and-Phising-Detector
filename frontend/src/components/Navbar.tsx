@@ -17,13 +17,12 @@ const NAV_LINKS = [
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
-  const location = useLocation(); // ← Untuk mendeteksi URL saat ini
+  const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 1. Cek status login saat pertama kali load
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
@@ -45,7 +44,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // 3. Deteksi apakah user sedang di halaman Login atau Register
   const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
 
   return (
@@ -84,15 +82,21 @@ export function Navbar() {
         {!isAuthPage && (
           <div className="hidden items-center gap-2 sm:flex">
             
-            <Button 
-              onClick={() => {
-                navigate(isLoggedIn ? "/dashboard" : "/login");
-              }}
-              variant="brand" 
-              size="lg"
-            >
-              Analyze Now
-            </Button>
+          <Button 
+            onClick={() => {
+              if (!isLoggedIn) {
+                navigate('/login');
+              } else if (localStorage.getItem('role') === 'admin') {
+                navigate('/dashboard');
+              } else {
+                navigate('/app');
+              }
+            }}
+            variant="brand" 
+            size="lg"
+          >
+            Analyze Now
+          </Button>
 
             {/* Tombol Logout (Hanya muncul jika SUDAH login) */}
             {isLoggedIn && (

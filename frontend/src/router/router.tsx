@@ -3,10 +3,15 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "@/pages/Home";
 import LoginPage from "@/components/Login";     
 import SignUpPage from "@/components/SignUp";  
+
 import PrivateRoute from "@/components/PrivateRoute"; 
 
-import DashboardLayout from "@/layouts/dashboard-layout";
+import AdminLayout from "@/layouts/admin-layout";
+import AdminDashboard from "@/pages/dashboard-admin/AdminDashboard";
+import UserManagement from "@/pages/dashboard-admin/UserManagement";
+import SystemSettings from "@/pages/dashboard-admin/SystemSettings";
 
+import DashboardLayout from "@/layouts/dashboard-layout";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import Phishing from "@/pages/dashboard/Phishing";
 import FakeNews from "@/pages/dashboard/FakeNews";
@@ -17,7 +22,6 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-
   {
     path: "/login",
     element: <LoginPage />,
@@ -30,29 +34,32 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      <PrivateRoute>
+      <PrivateRoute allowedRoles={["user"]}>
         <DashboardLayout />
       </PrivateRoute>
     ),
     children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "phishing",
-        element: <Phishing />,
-      },
-      {
-        path: "fake-news",
-        element: <FakeNews />,
-      },
-      {
-        path: "history",
-        element: <History />,
-      },
+      { index: true, element: <Dashboard /> },
+      { path: "phishing", element: <Phishing /> },
+      { path: "fake-news", element: <FakeNews /> },
+      { path: "history", element: <History /> },
     ],
   },
+
+  {
+    path: "/admin",
+    element: (
+      <PrivateRoute allowedRoles={["admin"]}>
+        <AdminLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: "users", element: <UserManagement /> },
+      { path: "settings", element: <SystemSettings /> },
+    ],
+  },
+
   {
     path: "*",
     element: <Navigate to="/" replace />,

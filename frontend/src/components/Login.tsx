@@ -15,13 +15,8 @@ export const Login: React.FC = () => {
     setError(null);
     setLoading(true);
 
-    try {
-      // Gunakan environment variable, fallback ke localhost jika tidak ada
+  try {
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-
-      const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/';
-      localStorage.removeItem('redirectAfterLogin');
-      navigate(redirectUrl);
 
       const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
@@ -39,15 +34,22 @@ export const Login: React.FC = () => {
 
       const data: LoginResponse = await response.json();
       
-      // Simpan token
       localStorage.setItem('token', data.access_token);
-      localStorage.setItem('user', JSON.stringify(data.user)); // Opsional: simpan data user
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('role', data.user.role);
       
-      // Redirect ke halaman dashboard/home setelah berhasil
-      navigate('/'); 
-      
+      const redirectTo = localStorage.getItem('redirectAfterLogin');
+      localStorage.removeItem('redirectAfterLogin');
+
+      if (redirectTo) {
+        navigate(redirectTo);
+      } else if (data.user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');       
+      }
     } catch (err: any) {
-      setError(err.message || 'Terjadi kesalahan pada server');
+      setError(err.message || 'An error occurred during login. Please try again.');
     } finally {
       setLoading(false);
     }

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Navbar } from "@/components/Navbar";
 
 const SignupPage: React.FC = () => {
-  const [first_name, setFirst_name] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -20,11 +20,10 @@ const SignupPage: React.FC = () => {
     setLoading(true);
 
     try {
-      // Gunakan environment variable, fallback ke localhost
       const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
       const response = await axios.post(`${apiUrl}/api/register`, {
-        first_name,
+        name,
         username,
         email,
         password,
@@ -71,14 +70,14 @@ const SignupPage: React.FC = () => {
         <form onSubmit={handleSignup} className="space-y-5">
           
           <div>
-            <label htmlFor="first_name" className="mb-2 block text-sm font-medium text-foreground">
+            <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
               Name
             </label>
             <input
-              id="first_name"
+              id="name"
               type="text"
-              value={first_name}
-              onChange={(e) => setFirst_name(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
               className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/50"
               placeholder="Your Name"
