@@ -52,4 +52,20 @@ class ApiClient
             ->withHeaders($headers)
             ->post($url, $body);
     }
+
+    /**
+     * HTTP POST Form.
+     */
+    public function postForm(
+        string $url,
+        array $body = [],
+        array $headers = [],
+        int $timeout = 15
+    ): Response {
+
+        return $this->client($timeout)
+            ->withHeaders($headers)
+            ->asForm()
+            ->post($url, $body);
+    }
 }

@@ -37,10 +37,23 @@ return [
 
     'virustotal' => [
 
-        'api_key' => env('VIRUSTOTAL_API_KEY'),
+    'api_key' => env('VIRUSTOTAL_API_KEY'),
 
-        'base_url' => 'https://www.virustotal.com/api/v3',
+    'submit_url' => env(
+        'VIRUSTOTAL_SUBMIT_URL',
+        'https://www.virustotal.com/api/v3/urls'
+    ),
 
-    ],
+    'analysis_url' => env(
+        'VIRUSTOTAL_ANALYSIS_URL',
+        'https://www.virustotal.com/api/v3/analyses'
+    ),
+
+    'url_report_url' => env(
+        'VIRUSTOTAL_URL_REPORT_URL',
+        'https://www.virustotal.com/api/v3/urls'
+    ),
+
+],
 
 ];
