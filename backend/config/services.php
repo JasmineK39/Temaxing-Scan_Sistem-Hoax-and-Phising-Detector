@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'virustotal' => [
+
+        'api_key' => env('VIRUSTOTAL_API_KEY'),
+
+        'base_url' => 'https://www.virustotal.com/api/v3',
+
+    ],
+
 ];
