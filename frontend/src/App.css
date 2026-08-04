@@ -1,3 +1,5 @@
+@import "@/index.css";
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -182,3 +184,11 @@
     border-right-color: var(--border);
   }
 }
+
+  .toggle-icon {
+    width: 25px;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+
