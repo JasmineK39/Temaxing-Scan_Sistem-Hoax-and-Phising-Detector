@@ -92,4 +92,20 @@ return [
 
     ],
 
+    'phishtank' => [
+
+    'app_key' => env('PHISHTANK_APP_KEY'),
+
+    'base_url' => env(
+        'PHISHTANK_BASE_URL',
+        'http://checkurl.dev.phishtank.com/checkurl/'
+    ),
+
+    'user_agent' => env(
+        'PHISHTANK_USER_AGENT',
+        'temaxing-scan/1.0'
+    ),
+
+],
+
 ];
