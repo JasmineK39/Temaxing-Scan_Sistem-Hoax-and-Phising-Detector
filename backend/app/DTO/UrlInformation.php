@@ -6,19 +6,61 @@ class UrlInformation
 {
     public function __construct(
 
-        public string $originalUrl,
+        /**
+         * URL asli dari user.
+         */
+        public readonly string $originalUrl,
 
-        public string $normalizedUrl,
+        /**
+         * URL yang sudah dinormalisasi.
+         */
+        public readonly string $normalizedUrl,
 
-        public string $scheme,
+        /**
+         * http / https
+         */
+        public readonly string $scheme,
 
-        public string $host,
+        /**
+         * Full host.
+         *
+         * sub.example.co.id
+         */
+        public readonly string $host,
 
-        public ?string $registeredDomain,
+        /**
+         * Registered domain.
+         *
+         * example.co.id
+         */
+        public readonly ?string $registeredDomain,
 
-        public ?string $path,
+        /**
+         * Subdomain.
+         *
+         * sub
+         */
+        public readonly ?string $subdomain,
 
-        public ?string $query,
+        /**
+         * Port.
+         */
+        public readonly ?int $port,
+
+        /**
+         * Path.
+         */
+        public readonly ?string $path,
+
+        /**
+         * Query string.
+         */
+        public readonly ?string $query,
+
+        /**
+         * Fragment.
+         */
+        public readonly ?string $fragment,
 
     ) {}
 }

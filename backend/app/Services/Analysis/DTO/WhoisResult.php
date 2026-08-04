@@ -17,6 +17,26 @@ class WhoisResult extends ProviderResult
 
         public readonly ?int $domainAge = null,
 
+        /*
+        |--------------------------------------------------------------------------
+        | Production-ready fields
+        |--------------------------------------------------------------------------
+        */
+
+        public readonly bool $isRecentlyRegistered = false,
+
+        public readonly ?int $daysUntilExpiration = null,
+
+        public readonly array $statuses = [],
+
+        public readonly array $nameServers = [],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Debug
+        |--------------------------------------------------------------------------
+        */
+
         public readonly array $rawData = [],
 
         ?string $error = null,

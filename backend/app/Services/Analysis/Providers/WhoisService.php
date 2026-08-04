@@ -30,6 +30,14 @@ class WhoisService implements UrlProviderInterface
 
         try {
 
+        if ($urlInformation->registeredDomain === null) {
+    return new WhoisResult(
+        success: false,
+        error: 'Registered domain could not be determined.',
+        responseTime: $this->elapsed($start),
+    );
+}
+
             $endpoint = $this->resolver->resolve(
                 $urlInformation->registeredDomain
             );
@@ -52,9 +60,9 @@ class WhoisService implements UrlProviderInterface
             }
 
             return $this->mapper->map(
-                json: $response->json(),
-                responseTime: $this->elapsed($start),
-            );
+    $response->json(),
+    $this->elapsed($start),
+);
 
         } catch (Throwable $e) {
 
