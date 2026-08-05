@@ -37,21 +37,73 @@ return [
 
     'virustotal' => [
 
-    'api_key' => env('VIRUSTOTAL_API_KEY'),
+        'api_key' => env('VIRUSTOTAL_API_KEY'),
 
-    'submit_url' => env(
-        'VIRUSTOTAL_SUBMIT_URL',
-        'https://www.virustotal.com/api/v3/urls'
+        'submit_url' => env(
+            'VIRUSTOTAL_SUBMIT_URL',
+            'https://www.virustotal.com/api/v3/urls'
+        ),
+
+        'analysis_url' => env(
+            'VIRUSTOTAL_ANALYSIS_URL',
+            'https://www.virustotal.com/api/v3/analyses'
+        ),
+
+        'url_report_url' => env(
+            'VIRUSTOTAL_URL_REPORT_URL',
+            'https://www.virustotal.com/api/v3/urls'
+        ),
+
+    ],
+
+    'urlscan' => [
+
+        'api_key' => env('URLSCAN_API_KEY'),
+
+        'submit_url' => env(
+            'URLSCAN_SUBMIT_URL',
+            'https://urlscan.io/api/v1/scan/'
+        ),
+
+        'result_url' => env(
+            'URLSCAN_RESULT_URL',
+            'https://urlscan.io/api/v1/result'
+        ),
+
+        'visibility' => env(
+        'URLSCAN_VISIBILITY',
+        'unlisted'
     ),
 
-    'analysis_url' => env(
-        'VIRUSTOTAL_ANALYSIS_URL',
-        'https://www.virustotal.com/api/v3/analyses'
+    'max_attempts' => env(
+        'URLSCAN_MAX_ATTEMPTS',
+        20
     ),
 
-    'url_report_url' => env(
-        'VIRUSTOTAL_URL_REPORT_URL',
-        'https://www.virustotal.com/api/v3/urls'
+    'poll_interval' => env(
+        'URLSCAN_POLL_INTERVAL',
+        2
+    ),
+
+    'timeout' => env(
+    'URLSCAN_TIMEOUT',
+    90
+),
+
+    ],
+
+    'phishtank' => [
+
+    'app_key' => env('PHISHTANK_APP_KEY'),
+
+    'base_url' => env(
+        'PHISHTANK_BASE_URL',
+        'http://checkurl.dev.phishtank.com/checkurl/'
+    ),
+
+    'user_agent' => env(
+        'PHISHTANK_USER_AGENT',
+        'temaxing-scan/1.0'
     ),
 
 ],

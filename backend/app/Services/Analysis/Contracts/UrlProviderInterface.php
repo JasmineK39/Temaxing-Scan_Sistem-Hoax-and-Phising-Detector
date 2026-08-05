@@ -13,6 +13,7 @@ interface UrlProviderInterface
     /**
      * @return T
      */
+    
     public function analyze(
         UrlInformation $urlInformation
     ): ProviderResult;
