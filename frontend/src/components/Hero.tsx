@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, ShieldCheck, Link2 } from "lucide-react";
+import { Sparkles, ShieldCheck, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroIllustration from "@/assets/hero-shield.png";
 
