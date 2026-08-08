@@ -12,7 +12,7 @@ class ProviderRegistry
 {
     public function __construct(
         protected WhoisService $whois,
-        protected SSLService $rdap,
+        protected SSLService $ssl,
         protected VirusTotalService $virusTotal,
         protected UrlScanService $urlScan,
         protected PhishTankService $phishTank,
@@ -25,7 +25,7 @@ class ProviderRegistry
 
             'whois' => $this->whois,
 
-            'rdap' => $this->rdap,
+            'ssl' => $this->ssl,
 
             'virustotal' => $this->virusTotal,
 
