@@ -11,44 +11,45 @@ class UrlScanResponseMapper
         int $responseTime
     ): UrlScanResult {
 
-    $page = data_get(
-    $json,
-    'page',
-    []
-);
+        $page = data_get(
+            $json,
+            'page',
+            []
+        );
 
-$overall = data_get(
-    $json,
-    'verdicts.overall',
-    []
-);
+        $overall = data_get(
+            $json,
+            'verdicts.overall',
+            []
+        );
 
-$meta = data_get(
-    $json,
-    'meta',
-    []
-);
+        $meta = data_get(
+            $json,
+            'meta',
+            []
+        );
 
-dump(
-    data_get(
-        $meta,
-        'processors.wappa'
-    )
-);
+        $wappaData = data_get(
+            $meta,
+            'processors.wappa.data',
+            []
+        );
 
         return new UrlScanResult(
 
             success: true,
 
             malicious: (bool) data_get(
-    $overall,
-    'malicious',
-    false
-),
-
-            score: data_get(
                 $overall,
-                'score'
+                'malicious',
+                false
+            ),
+
+            score: $this->toNullableInt(
+                data_get(
+                    $overall,
+                    'score'
+                )
             ),
 
             pageTitle: data_get(
@@ -82,13 +83,7 @@ dump(
             ),
 
             technologies: $this->mapTechnologies(
-
-                data_get(
-                    $meta,
-                    'processors.wappa.data',
-                    []
-                )
-
+                $wappaData
             ),
 
             redirectChain: (array) data_get(
@@ -102,43 +97,62 @@ dump(
                 'task.screenshotURL'
             ),
 
-            rawData: [],
-
-            
+            rawData: config('app.debug')
+                ? $json
+                : [],
 
             responseTime: $responseTime,
-
         );
-
-        
-
     }
 
     /**
      * Ambil hanya nama teknologi.
+     *
+     * @param array<int, array<string, mixed>> $technologies
+     * @return string[]
      */
     protected function mapTechnologies(
         array $technologies
     ): array {
 
         return array_values(
-
             array_filter(
-
                 array_map(
+                    static function (array $technology): ?string {
 
-                    fn (array $technology) => data_get(
-                        $technology,
-                        'app'
-                    ),
+                        $app = data_get(
+                            $technology,
+                            'app'
+                        );
 
+                        return is_string($app) && $app !== ''
+                            ? $app
+                            : null;
+                    },
                     $technologies
-
                 )
-
             )
-
         );
+    }
 
+    /**
+     * Konversi nilai menjadi integer nullable.
+     */
+    protected function toNullableInt(
+        mixed $value
+    ): ?int {
+
+        if (
+            $value === null ||
+            $value === ''
+        ) {
+            return null;
+        }
+
+        if (! is_numeric($value)) {
+            return null;
+        }
+
+        return (int) $value;
     }
 }
