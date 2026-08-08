@@ -9,17 +9,22 @@ use App\Services\Analysis\DTO\RiskReason;
 
 class PhishTankRule implements RiskRuleInterface
 {
+    private const VERIFIED_AND_VALID_SCORE = 50;
+
+    private const VERIFIED_BUT_INVALID_SCORE = 15;
+
+    private const FOUND_UNVERIFIED_SCORE = 10;
+
     /**
      * @return RiskReason[]
      */
     public function evaluate(
         AnalysisResult $analysis
     ): array {
-
         $result = $analysis->providers['phishtank'] ?? null;
 
         /**
-         * Provider gagal bukan evidence bahwa URL berbahaya.
+         * Provider failure bukan evidence bahwa URL berbahaya.
          */
         if (
             ! $result instanceof PhishTankResult ||
@@ -28,81 +33,52 @@ class PhishTankRule implements RiskRuleInterface
             return [];
         }
 
-        /*
+        /**
          * URL tidak ditemukan di database PhishTank.
          */
         if (! $result->found) {
             return [];
         }
 
-        $reasons = [];
-
-        /*
-         * ==========================================================
-         * VERIFIED + VALID
-         * ==========================================================
-         *
-         * Ini merupakan signal terkuat dari PhishTank.
+        /**
+         * Signal terkuat:
+         * ditemukan + diverifikasi + masih valid.
          */
-
-        if ($result->verified && $result->valid) {
-
-            $reasons[] = new RiskReason(
-
-                provider: 'PhishTank',
-
-                message: 'URL terdaftar di PhishTank dan telah diverifikasi sebagai phishing.',
-
-                score: 50,
-
-            );
-
-            return $reasons;
+        if (
+            $result->verified &&
+            $result->valid
+        ) {
+            return [
+                new RiskReason(
+                    provider: 'PhishTank',
+                    message: 'URL terdaftar di PhishTank dan telah diverifikasi sebagai phishing.',
+                    score: self::VERIFIED_AND_VALID_SCORE,
+                ),
+            ];
         }
 
-        /*
-         * ==========================================================
-         * VERIFIED
-         * ==========================================================
-         *
-         * Sudah diverifikasi, tetapi status valid tidak aktif.
+        /**
+         * Pernah diverifikasi tetapi sekarang tidak valid.
          */
-
         if ($result->verified) {
-
-            $reasons[] = new RiskReason(
-
-                provider: 'PhishTank',
-
-                message: 'URL terdaftar di PhishTank dan telah diverifikasi.',
-
-                score: 35,
-
-            );
-
-            return $reasons;
+            return [
+                new RiskReason(
+                    provider: 'PhishTank',
+                    message: 'URL pernah diverifikasi sebagai phishing, tetapi status laporan saat ini tidak valid.',
+                    score: self::VERIFIED_BUT_INVALID_SCORE,
+                ),
+            ];
         }
 
-        /*
-         * ==========================================================
-         * FOUND ONLY
-         * ==========================================================
-         *
-         * URL ditemukan di database, tetapi belum terverifikasi.
-         *
-         * Ini hanya supporting evidence.
+        /**
+         * Ditemukan tetapi belum diverifikasi.
          */
-
-        $reasons[] = new RiskReason(
-
-            provider: 'PhishTank',
-
-            message: 'URL ditemukan dalam database PhishTank tetapi belum terverifikasi.',
-
-            score: 15,
-
-        );
-
-        return $reasons;
+        return [
+            new RiskReason(
+                provider: 'PhishTank',
+                message: 'URL ditemukan dalam database PhishTank tetapi belum diverifikasi.',
+                score: self::FOUND_UNVERIFIED_SCORE,
+            ),
+        ];
     }
 }

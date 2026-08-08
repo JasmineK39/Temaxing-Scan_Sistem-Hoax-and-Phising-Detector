@@ -9,17 +9,18 @@ use App\Services\Analysis\DTO\UrlScanResult;
 
 class UrlScanRule implements RiskRuleInterface
 {
+    private const MALICIOUS_SCORE = 40;
+
     /**
      * @return RiskReason[]
      */
     public function evaluate(
         AnalysisResult $analysis
     ): array {
-
         $result = $analysis->providers['urlscan'] ?? null;
 
         /**
-         * Provider gagal bukan evidence bahwa URL malicious.
+         * Provider failure bukan evidence bahwa URL malicious.
          */
         if (
             ! $result instanceof UrlScanResult ||
@@ -28,70 +29,16 @@ class UrlScanRule implements RiskRuleInterface
             return [];
         }
 
-        $reasons = [];
+        if (! $result->malicious) {
+            return [];
+        }
 
-        /*
-         * ==========================================================
-         * MALICIOUS VERDICT
-         * ==========================================================
-         *
-         * Ini merupakan signal paling kuat dari URLScan.
-         */
-
-        if ($result->malicious) {
-
-            $reasons[] = new RiskReason(
-
+        return [
+            new RiskReason(
                 provider: 'URLScan',
-
                 message: 'URLScan mendeteksi URL sebagai malicious.',
-
-                score: 40,
-
-            );
-        }
-
-        /*
-         * ==========================================================
-         * URLSCAN SCORE
-         * ==========================================================
-         *
-         * Score provider tidak digunakan langsung sebagai
-         * Risk Engine score.
-         *
-         * Kita hanya menggunakannya sebagai supporting signal.
-         */
-
-        if (
-            ! $result->malicious &&
-            $result->score !== null &&
-            $result->score >= 50
-        ) {
-
-            $reasons[] = new RiskReason(
-
-                provider: 'URLScan',
-
-                message: sprintf(
-                    'URLScan memberikan risk score %d.',
-                    $result->score
-                ),
-
-                score: 15,
-
-            );
-        }
-
-        /*
-         * ==========================================================
-         * REDIRECT CHAIN
-         * ==========================================================
-         *
-         * Redirect sendiri bukan bukti phishing.
-         *
-         * Jangan memberi score hanya karena terdapat redirect.
-         */
-
-        return $reasons;
+                score: self::MALICIOUS_SCORE,
+            ),
+        ];
     }
 }

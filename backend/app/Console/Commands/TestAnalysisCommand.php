@@ -74,7 +74,7 @@ class TestAnalysisCommand extends Command
             $report = $this->analysisService->analyze(
                 $urlInformation
             );
-
+            
             /*
              * 5. Display provider results
              */
