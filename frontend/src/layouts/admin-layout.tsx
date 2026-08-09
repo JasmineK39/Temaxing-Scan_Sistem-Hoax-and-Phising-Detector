@@ -2,10 +2,10 @@ import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { 
   LayoutDashboard, 
   Users, 
-  Settings, 
   LogOut, 
   ShieldCheck 
 } from "lucide-react";
+import { ClipboardClock } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 export default function AdminLayout() {
@@ -22,7 +22,7 @@ export default function AdminLayout() {
   const adminLinks = [
     { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
     { to: "/admin/users", label: "User Management", icon: Users },
-    { to: "/admin/settings", label: "Settings", icon: Settings },
+    { to: "/admin/user-history", label: "User History", icon: ClipboardClock },
   ];
 
   return (

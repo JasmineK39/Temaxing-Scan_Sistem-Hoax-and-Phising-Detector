@@ -9,7 +9,7 @@ import PrivateRoute from "@/components/PrivateRoute";
 import AdminLayout from "@/layouts/admin-layout";
 import AdminDashboard from "@/pages/dashboard-admin/AdminDashboard";
 import UserManagement from "@/pages/dashboard-admin/UserManagement";
-import SystemSettings from "@/pages/dashboard-admin/SystemSettings";
+import UserHistoryManagement from "@/pages/dashboard-admin/UserHistoryManagement";
 
 import DashboardLayout from "@/layouts/dashboard-layout";
 import Dashboard from "@/pages/dashboard/Dashboard";
@@ -56,7 +56,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <AdminDashboard /> },
       { path: "users", element: <UserManagement /> },
-      { path: "settings", element: <SystemSettings /> },
+      { path: "user-history", element: <UserHistoryManagement /> },
     ],
   },
 
