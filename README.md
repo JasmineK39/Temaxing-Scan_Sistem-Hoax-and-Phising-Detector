@@ -123,46 +123,6 @@ Dashboard
 
 ---
 
-# Roadmap
-
-## Phase 1 — Foundation
-
-- ✅ Authentication
-- ✅ PostgreSQL Integration
-- ✅ URL Normalization
-- ✅ URL Information Extraction
-- ✅ Provider Architecture
-- ✅ Multi-provider Integration
-
----
-
-## Phase 2 — Risk Analysis
-
-- 🚧 Analysis Orchestrator
-- 🚧 Risk Engine
-- 🚧 Risk Scoring
-- 🚧 Risk Classification
-- 🚧 Recommendation Engine
-
----
-
-## Phase 3 — AI Analysis
-
-- 🚧 AI-Based URL Explanation
-- 🚧 Fake News Classification
-- 🚧 AI Recommendation
-
----
-
-## Phase 4 — User Features
-
-- 🚧 Scan History API
-- 🚧 User Profile
-- 🚧 Account Settings
-- 🚧 Dashboard Analytics
-
----
-
 # Project Structure
 
 ```
